@@ -193,7 +193,8 @@ class Movies extends Component {
   };
   // this method will be called when an instance of this component is rendered in the DOM
   componentDidMount() {
-    this.setState({ movies: getMovies(), genres: getGenres() });
+    const genres = [{ name: 'All Genres' }, ...getGenres()];
+    this.setState({ movies: getMovies(), genres });
   }
 
   handleDelete = (movie) => {
@@ -221,7 +222,7 @@ class Movies extends Component {
     // {_id: "5b21ca3eeb7f6fbccd471818", name: "Action"}
     // console.log(genre);
 
-    this.setState({ selectedGenre: genre });
+    this.setState({ selectedGenre: genre, currentPage: 1 });
   };
 
   render() {
@@ -234,9 +235,14 @@ class Movies extends Component {
     } = this.state;
     if (count === 0) return <p>There are no movies in the database!</p>;
 
-    const filtered = selectedGenre
-      ? allMovies.filter((m) => m.genre._id === selectedGenre._id)
-      : allMovies;
+    // (selectedGenre && selectedGenre._id) both are selected because
+    // without 'selectedGenre._id' 'All Genres' will show 0 movies,
+    // because 'All Genres' have no id, so we use && to filter out only those
+    // which have satisfied both condition
+    const filtered =
+      selectedGenre && selectedGenre._id
+        ? allMovies.filter((m) => m.genre._id === selectedGenre._id)
+        : allMovies;
 
     const movies = paginate(filtered, currentPage, pageSize);
 
