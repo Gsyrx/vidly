@@ -320,7 +320,7 @@ import _ from 'lodash'; // for sorting
 
 class Movies extends Component {
   state = {
-    // these properties are initialised to empty array because
+    // these properties(movies, genres) are initialised to empty array because
     // it's going to take some time until we get the data from the server,
     // during this time we make sure that 'movies' and 'genres' are not undefined
     // otherwise we will get a runtime error
@@ -330,6 +330,7 @@ class Movies extends Component {
     pageSize: 4,
     sortColumn: { path: 'title', order: 'asc' },
   };
+
   // this method will be called when an instance of this component is rendered in the DOM
   componentDidMount() {
     const genres = [{ _id: '', name: 'All Genres' }, ...getGenres()];
