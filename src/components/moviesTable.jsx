@@ -1,6 +1,8 @@
 // < ----- Sorting ----- >
 
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 import Table from './common/table';
 import Like from './common/like';
 
@@ -8,7 +10,13 @@ class MoviesTable extends Component {
   // here columns are not defined within a state because
   // it's not going to change through the life cycle of the component
   columns = [
-    { path: 'title', label: 'Title' },
+    {
+      path: 'title',
+      label: 'Title',
+      content: (movie) => (
+        <Link to={`/movies/${movie._id}`}>{movie.title}</Link>
+      ),
+    },
     { path: 'genre.name', label: 'Genre' },
     { path: 'numberInStock', label: 'Stock' },
     { path: 'dailyRentalRate', label: 'Rate' },
