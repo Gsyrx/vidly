@@ -10,6 +10,8 @@ const Input = ({ name, label, error, ...rest }) => {
   );
 };
 
+export default Input;
+
 // const Input = ({ type, name, label, value, error, onChange }) => {
 //   return (
 //     <div className="form-group">
@@ -26,5 +28,3 @@ const Input = ({ name, label, error, ...rest }) => {
 //     </div>
 //   );
 // };
-
-export default Input;
